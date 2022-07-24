@@ -9,15 +9,15 @@ export const ToDoList = () => {
 		<div className="bigDiv">
 	<div className="todo-container">
 		<h1>To Do List</h1>
-		<input type="text" onChange={(e) => setItem(e.target.value) }/>
+		<input type="text" value={item} onChange={(e) => setItem(e.target.value) }/>
 		<button onClick={() => {
 				actions.addItem([...store.list, { label: item, done: false} ])
-
+				setItem("");
 		}}>click me</button>
 			<div>
                 {store.list.map((item, index) => {
                     return (
-                        <div key = {index}>
+                        <div className="d-flex justify-content-between" key = {index}>
                             {item.label}
 							<button onClick={()=> actions.removeTodo(index)}>delete</button>
                         </div>

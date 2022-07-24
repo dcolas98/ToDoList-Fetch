@@ -2,16 +2,18 @@ const getState = ({
 	getStore,
 	getActions,
 	setStore
+
 }) => {
 	return {
 		store: {
-			list: []
+			list: [],
+			randomNumber: Math.floor(Math.random() * 1000)
 		},
 		actions: {
 			removeTodo: (index) => {
 				const store = getStore();
-				const removeArr = store.list.filter((list, i) => index !== i)
-				fetch("https://assets.breatheco.de/apis/fake/todos/user/dcolas",{
+				const removeArr = store.list.filter((singleTodo) => singleTodo.indexof !== index)
+				fetch(`https://assets.breatheco.de/apis/fake/todos/user/dcolas`,{
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
@@ -24,9 +26,12 @@ const getState = ({
 				})
 				.catch((error) => console.log("error", error));
 
+				console.log(removeArr);
+
 			},
 			addItem: (list) => {
-				fetch("https://assets.breatheco.de/apis/fake/todos/user/dcolas",{
+				const store = getStore();
+				fetch(`https://assets.breatheco.de/apis/fake/todos/user/dcolas`,{
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
